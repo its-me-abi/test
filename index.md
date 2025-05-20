@@ -1,6 +1,5 @@
 # pysideplus
 ```
-
 this repo contain reusable beautifull pyside6 widgets.you can use it instead  of pyside6 widgets
 for example TabPlusPlus (modified qtabwidget).it is inherited from Qtabwidget
    it provides beautifull tab with  new tab button and tab history menu and tab search bar
