@@ -29,5 +29,41 @@ now when github event occurs then our code canbe automattically published to pyp
 we dont have to upload  two times to github and pypi.  
 when we upload code to github it will automattically published to pypi.  
 
+### sample .yaml file
+```
+name: Publish to PyPI
 
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0
 
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+
+      - name: Build package
+        run: |
+          python setup.py sdist bdist_wheel
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__  # Use the token authentication
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          twine upload dist/*
+
+```
