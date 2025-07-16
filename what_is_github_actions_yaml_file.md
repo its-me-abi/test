@@ -1,3 +1,7 @@
+---
+layout: default
+title: Docs Home
+---
 
 ## pypi publishing and github actions relationship
 github actions are used for automation.
