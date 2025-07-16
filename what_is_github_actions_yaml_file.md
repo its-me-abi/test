@@ -1,13 +1,14 @@
 ---
 layout: default
-title: Docs Home
+title: git actions and pypi
 ---
+this is what i learned as beginner  , documenting it for later,so i dont have to relearn
 
 ### github actions
 github actions are used for automation. it is a event handler and it contains virtual machines ( called runner),
-when github events occur like pushing code then github will run repos workflow files (.github/workflows/*.yml).  
-this files are called workflow files. it contains defnitions and instructions. it will read defnitions and runs instructions  using a virtual machnie,   
-mac os, windows , and linux is avilable and we can define in this file.  
+when github events occur like pushing code then github will run repos workflow files,these files are in  (.github/workflows/*.yml).  
+this files are called workflow files. it contains defnitions and instructions.github will read defnitions and runs instructions  using its own virtual machine,   
+mac os, windows , and linux is avilable and we can define it in this file.  
 if there is run commands in this files then it willbe executed.
 
 ### pypi publishing and github actions 
