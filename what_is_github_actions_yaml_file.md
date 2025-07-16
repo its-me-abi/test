@@ -12,8 +12,8 @@ mac os, windows , and linux is avilable and we can define it in this file.
 if there is run commands in this files then it willbe executed.
 
 ### pypi publishing and github actions 
-we can add workflow files to gituhub so we can create commands to upload our github code to pypi.  
-now when githuib event occur our code canbe automattically published to pypi
+we can add workflow files to gituhub .so we can create commands to upload our project to pypi.   
+now when github event occurs then our code canbe automattically published to pypi
 
 ![pyp_and_github_actions drawio](https://github.com/user-attachments/assets/62c61f7d-44c4-44d7-990b-7af83d21c011)
 
