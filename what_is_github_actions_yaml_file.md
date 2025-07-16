@@ -19,11 +19,11 @@ now when github event occurs then our code canbe automattically published to pyp
 ![pyp_and_github_actions drawio](https://github.com/user-attachments/assets/62c61f7d-44c4-44d7-990b-7af83d21c011)
 
 **flow of github actions for automattically publishing to pypi**
-1. we write action file and commit into a githubs folder like (.github/workflows/helo.yml)
+1. we write workflow file and commit into a githubs folder like (.github/workflows/helo.yml)
 2. we write our python package that contain pypi compatible structre 
 3. we push code to github
-4. if there is any action files in this folder (.github/workflows/*.yaml) then github internaly reads this files and executes its instructions
-5. now code willbe automattcialy uploaded to pypyi by github
+4. if there is any files in this folder (.github/workflows/*.yaml) then github internaly reads this files and executes its instructions
+5. now code willbe automattcialy uploaded to pypyi from github
 
 ### the adwantage is. 
 we dont have to upload  two times to github and pypi.  
