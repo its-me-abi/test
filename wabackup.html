@@ -1,5 +1,53 @@
-<html>
-<script>
-  alert(document.domain);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+
+    <h2 style="color: green">Whatsapp web contacts exporter </h2>
+
+    <h4>Copy this link below and save it as bookmark,</h4>
+    <h4>open web.whatsapp.com and login</h4>
+    <h4>click on this bookmarklet</h4>
+
+now a json file willbe downloaded,it contains all contacts,later you can convert it to vcf
+
+</font>
+
+<textarea hidden="true" id="myInputField">
+    javascript:(function()%7Bwindow.db%20%3Dnull%3B%0Awindow.DB_NAME%20%3D%20%22model-storage%22%3B%0A%0Awindow.OBJECT_STORE_NAME%20%3D%20%22contact%22%3B%0A%0Afunction%20openDb()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20const%20request%20%3D%20indexedDB.open(window.DB_NAME)%3B%0A%0A%20%20%20%20%20%20%20%20request.onerror%20%3D%20(event)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20reject(event.target.error)%3B%0A%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20request.onsuccess%20%3D%20(event)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20db%20%3D%20event.target.result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(db)%3B%0A%20%20%20%20%20%20%20%20%7D%3B%0A%0A%0A%20%20%20%20%20%20%20%20request.onupgradeneeded%20%3D%20(event)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20db%20%3D%20event.target.result%3B%0A%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0A%0Aasync%20function%20readAllContacts()%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20if%20(!db)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20await%20openDb()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20const%20transaction%20%3D%20db.transaction(%5BOBJECT_STORE_NAME%5D%2C%20'readonly')%3B%0A%20%20%20%20%20%20%20%20const%20objectStore%20%3D%20transaction.objectStore(window.OBJECT_STORE_NAME)%3B%0A%0A%20%20%20%20%20%20%20%20const%20contacts%20%3D%20await%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20getAllRequest%20%3D%20objectStore.getAll()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20getAllRequest.onsuccess%20%3D%20(event)%20%3D%3E%20resolve(event.target.result)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20getAllRequest.onerror%20%3D%20(event)%20%3D%3E%20reject(event.target.error)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%0A%20%20%20%20%20%20%20%20console.log(contacts)%3B%0A%20%20%20%20%20%20%20%20downloadStringAsFile(JSON.stringify(contacts)%2C%20%22WACOntacts.json%22%2C%20%22application%2Fjson%22)%3B%0A%0A%20%20%20%20%7D%20catch%20(error)%20%7B%0A%20%20%20%20%20%20%20%20console.error(%22An%20error%20occurred%3A%22%2C%20error)%3B%0A%20%20%20%20%7D%0A%7D%0A%0A%0Afunction%20downloadStringAsFile(dataString%2C%20filename%2C%20mimeType%20%3D%20'text%2Fplain')%20%7B%0A%0A%20%20%20%20const%20blob%20%3D%20new%20Blob(%5BdataString%5D%2C%20%7B%20type%3A%20%60%24%7BmimeType%7D%3Bcharset%3Dutf-8%3B%60%20%7D)%3B%0A%20%20%20%20const%20url%20%3D%20URL.createObjectURL(blob)%3B%0A%20%20%20%20const%20link%20%3D%20document.createElement('a')%3B%0A%20%20%20%20link.setAttribute('href'%2C%20url)%3B%0A%20%20%20%20link.setAttribute('download'%2C%20filename)%3B%0A%20%20%20%20link.style.visibility%20%3D%20'hidden'%3B%0A%20%20%20%20link.style.position%20%3D%20'absolute'%3B%20%2F%2F%20Prevent%20it%20from%20affecting%20layout%0A%20%20%20%20link.style.top%20%3D%20'-9999px'%3B%0A%20%20%20%20link.style.left%20%3D%20'-9999px'%3B%0A%20%20%20%20document.body.appendChild(link)%3B%0A%20%20%20%20link.click()%3B%0A%20%20%20%20document.body.removeChild(link)%3B%0A%20%20%20%20URL.revokeObjectURL(url)%3B%0A%0A%20%20%20%20console.log(%60Download%20initiated%20%60)%3B%0A%7D%0A%0AreadAllContacts()%3B%7D)()%3B
+</textarea>
+</br>
+<button style="color: green;width: 150px;;height: 50px;border-color: gre" onclick="copy()">COPY </button>
+</div>
+
+<script >
+    function copy() {
+        const textToCopy = document.getElementById('myInputField').value
+        copyTextToClipboardModern(textToCopy);
+    }
+    function copyTextToClipboardModern(text) {
+        // Check if the Clipboard API is available
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    console.log('Text successfully copied to clipboard ');
+                    // Optional: Provide visual feedback to the user
+                    alert('Text copied to clipboard! pleas create a bookmark and paste  this as url and save bookmark..');
+                })
+                .catch(err => {
+                    console.error('Error copying text to clipboard (Clipboard API):', err);
+                    // Fallback to the older method if Clipboard API fails for some reason
+                    copyTextToClipboardLegacy(text);
+                });
+        } else {
+            console.warn('Clipboard API not available. Falling back to legacy method.');
+            copyTextToClipboardLegacy(text);
+        }
+    }
 </script>
+</body>
 </html>
